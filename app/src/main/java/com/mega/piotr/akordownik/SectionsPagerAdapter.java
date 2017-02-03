@@ -4,53 +4,60 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.util.Pair;
 import java.util.ArrayList;
+import java.util.List;
 
-public class SectionsPagerAdapter extends FragmentPagerAdapter {
+class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     private ArrayList<String> sectionsNames;
+    private ArrayList<List<Pair<String,String>>> data=new ArrayList<>();
 
-    public SectionsPagerAdapter(FragmentManager fm)
+    SectionsPagerAdapter(FragmentManager fm)
     {
         super(fm);
         sectionsNames = new ArrayList<>();
     }
-    public void addPage(String name)
+    private void addPage(String name)
     {
         sectionsNames.add(name);
+        data.add(new ArrayList<Pair<String, String>>());
     }
     public void removePage(String name)
     {
-        sectionsNames.remove(name);
+        int size=sectionsNames.size();
+        for (int i=0;i<size;i++) {
+            if(sectionsNames.get(i).equals(name))
+            {
+                sectionsNames.remove(i);
+                data.remove(i);
+                return;
+            }
+        }
     }
     public boolean containPage(String name)
     {
-        if(sectionsNames.contains(name))
-            return true;
-        return false;
+        return sectionsNames.contains(name);
     }
-    public void addToPage(String name, Pair<String,String> data)
+    void addToPage(String name, Pair<String,String> value)
     {
         if(!sectionsNames.contains(name))
-        {
             addPage(name);
-        }
         for (int i=0;i<sectionsNames.size();i++) {
             if(sectionsNames.get(i).equals(name))
             {
-                ControllerTabFragment fff=((ControllerTabFragment)getItem(i));
-                ListViewAdapter ggg=fff.lvadapter;
-                ggg.add(data);
+                data.get(i).add(value);
+                return;
             }
         }
     }
     public void removeFromPage(String name, Pair<String,String> data)
     {
-
+        //todo
     }
     @Override
     public Fragment getItem(int position)
     {
         ControllerTabFragment fragment=new ControllerTabFragment();
+        fragment.addAll(data.get(position));
         return fragment;
     }
 

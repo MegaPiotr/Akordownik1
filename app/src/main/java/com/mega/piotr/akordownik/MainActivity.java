@@ -17,9 +17,9 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static SectionsPagerAdapter sectionsPagerAdapter;
-    public static ViewPager viewPager;
-    public static TabLayout tabLayout;
+    public SectionsPagerAdapter sectionsPagerAdapter;
+    public ViewPager viewPager;
+    public TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,11 +42,11 @@ public class MainActivity extends AppCompatActivity {
 
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-            sectionsPagerAdapter.addPage("ogniskowy");
-            updateTab();
-            //sectionsPagerAdapter.addToPage("ogniskowy",new Pair<String, String>("Myslovits","Scenariusz dla moich sąsiadów"));
-            //sectionsPagerAdapter.addToPage("ogniskowy",new Pair<String, String>("Myslovits","Długość dźwięku samotności"));
+            //sectionsPagerAdapter.addPage("ogniskowy");
             //updateTab();
+            sectionsPagerAdapter.addToPage("ogniskowy",new Pair<>("Myslovits","Scenariusz dla moich sąsiadów"));
+            sectionsPagerAdapter.addToPage("ogniskowy",new Pair<>("Myslovits","Długość dźwięku samotności"));
+            updateTab();
             return true;
         }
 
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         updateTab();
     }
-    public static void updateTab() {
+    public void updateTab() {
         viewPager.setAdapter(sectionsPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
     }

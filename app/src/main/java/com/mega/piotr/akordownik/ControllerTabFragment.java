@@ -3,6 +3,7 @@ package com.mega.piotr.akordownik;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +18,20 @@ import java.util.concurrent.ExecutionException;
 public class ControllerTabFragment extends Fragment implements AdapterView.OnItemClickListener
 {
     ListViewAdapter lvadapter;
+    private List<Pair<String,String>> data=new ArrayList<>();
 
+    public void add(Pair<String,String> value){
+        data.add(value);
+    }
+    public void addAll(List<Pair<String,String>> value){
+        data.addAll(value);
+    }
+    @Override
+    public void onResume(){
+        super.onResume();
+        lvadapter.clear();
+        lvadapter.addAll(data);
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.tab_fragment, container, false);
