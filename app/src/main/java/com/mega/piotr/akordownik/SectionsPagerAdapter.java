@@ -8,22 +8,19 @@ import java.util.List;
 
 class SectionsPagerAdapter extends FragmentPagerAdapter {
 
-    private ArrayList<String> sectionsNames;
-    private ArrayList<List<Pair<String,String>>> data=new ArrayList<>();
+    private ArrayList<String> sectionsNames= new ArrayList<>();
+    private ArrayList<TabFragment> fragments=new ArrayList<>();
 
-    SectionsPagerAdapter(FragmentManager fm)
-    {
+    SectionsPagerAdapter(FragmentManager fm){
         super(fm);
-        sectionsNames = new ArrayList<>();
     }
-    private void addPage(String name)
-    {
+    private void addPage(String name) {
         sectionsNames.add(name);
-        data.add(new ArrayList<Pair<String, String>>());
+        fragments.add(new TabFragment());
+        notifyDataSetChanged();
     }
-    public void removePage(String name)
-    {
-        int size=sectionsNames.size();
+    public void removePage(String name) {
+        /*int size=sectionsNames.size();
         for (int i=0;i<size;i++) {
             if(sectionsNames.get(i).equals(name))
             {
@@ -31,42 +28,37 @@ class SectionsPagerAdapter extends FragmentPagerAdapter {
                 data.remove(i);
                 return;
             }
-        }
+        }*/
+        //todo
     }
     public boolean containPage(String name)
     {
         return sectionsNames.contains(name);
     }
-    void addToPage(String name, Pair<String,String> value)
-    {
+    public void addToPage(String name, Pair<String,String> value) {
         if(!sectionsNames.contains(name))
             addPage(name);
         for (int i=0;i<sectionsNames.size();i++) {
             if(sectionsNames.get(i).equals(name))
             {
-                data.get(i).add(value);
+                fragments.get(i).add(value);
                 return;
             }
         }
     }
-    public void removeFromPage(String name, Pair<String,String> data)
-    {
+    public void removeFromPage(String name, Pair<String,String> data) {
         //todo
     }
-    @Override
-    public Fragment getItem(int position)
-    {
-        ControllerTabFragment fragment=new ControllerTabFragment();
-        fragment.addAll(data.get(position));
-        return fragment;
-    }
 
+    @Override
+    public Fragment getItem(int position) {
+        return fragments.get(position);
+    }
     @Override
     public int getCount()
     {
         return sectionsNames.size();
     }
-
     @Override
     public CharSequence getPageTitle(int position)
     {

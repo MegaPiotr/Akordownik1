@@ -1,6 +1,6 @@
 package com.mega.piotr.akordownik;
 
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.util.Pair;
@@ -9,14 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 
-public class ControllerTabFragment extends Fragment implements AdapterView.OnItemClickListener
+public class TabFragment extends Fragment implements AdapterView.OnItemClickListener
 {
+    public final static String AUTHOR = "AUTHOR";
+    public final static String TITLE = "TITLE";
     ListViewAdapter lvadapter;
     private List<Pair<String,String>> data=new ArrayList<>();
 
@@ -43,6 +44,10 @@ public class ControllerTabFragment extends Fragment implements AdapterView.OnIte
     }
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        //kliknięcie w element listy
+        Pair<String,String> pair=lvadapter.getItem(position);
+        Intent intent = new Intent(this.getActivity(), SongActivity.class);
+        intent.putExtra(AUTHOR, pair.first);
+        intent.putExtra(TITLE, pair.second);
+        startActivity(intent);
     }
 }
