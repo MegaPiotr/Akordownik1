@@ -1,5 +1,6 @@
 package com.mega.piotr.akordownik;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,6 +15,8 @@ import android.view.MenuItem;
 
 import java.io.IOException;
 import java.util.List;
+
+import static com.mega.piotr.akordownik.TabFragment.AUTHOR;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,11 +46,11 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-
+        if (id == R.id.action_library) {
+            Intent intent = new Intent(this, LibraryActivity.class);
+            startActivity(intent);
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
     private void tabInit() {

@@ -1,5 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <songs_file>
+    <song author="Elektryczne Gitary" title="Dzieci">
+        <text><![CDATA[
+Dzieci wesoło wybiegły ze szkoły
+Zapaliły papierosy, wyciągnęły flaszki
+Chodnik zapluły, ludzi przepędziły
+Siedzą na ławeczkach i ryczą do siebie
+
+Wszyscy mamy źle w głowach, że żyjemy
+Hej, hej, la, la, la, la, hej, hej, hej, hej x2
+
+Tony papieru, tony analiz
+Genialne myśli, tłumy na sali
+Godziny modlitw, lata nauki
+Przysięgi, plany, podpisy, druki
+
+Wszyscy mamy...
+
+Wzorce, przykłady, szlachetne zabiegi
+Łańcuchy dłoni, zwarte szeregi
+Warstwy tradycji, wieki kultury
+Tydzień dobroci, ręce do góry
+
+Wszyscy mamy...
+
+Dzieci wesoło wybiegły ze szkoły
+Zapaliły papierosy, wyciągnęły flaszki
+Chodnik zapluły, ludzi przepędziły
+Siedzą na ławeczkach i ryczą do siebie...
+]]>
+        </text>
+        <chords line="1">A Cis</chords>
+        <chords line="2">A Cis</chords>
+        <chords line="6">G F</chords>
+    </song>
     <song author="Myslovits" title="Scenariusz dla moich sąsiadów">
         <text><![CDATA[
 A kiedy powrócisz już,

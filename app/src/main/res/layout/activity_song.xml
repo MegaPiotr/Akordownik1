@@ -21,6 +21,8 @@
             android:inputType="textPersonName"
             android:text="Name"
             android:ems="10"
+            android:textSize="32sp"
+            android:textStyle="bold"
             android:id="@+id/song_title" />
 
         <LinearLayout

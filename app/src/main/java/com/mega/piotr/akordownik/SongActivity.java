@@ -38,6 +38,7 @@ public class SongActivity extends AppCompatActivity {
         getDataFromXml(author,title);
     }
 
+    //todo przenieść do xmladapter
     private void getDataFromXml(String author, String title) {
         try {
             XmlPullParserFactory xmlFactoryObject = XmlPullParserFactory.newInstance();
