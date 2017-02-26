@@ -24,7 +24,7 @@ public class XmlAdapter {
     public XmlAdapter(Activity act){
         try {
             XmlPullParserFactory xmlFactoryObject = XmlPullParserFactory.newInstance();
-            XmlPullParser myParser = xmlFactoryObject.newPullParser();
+            myParser = xmlFactoryObject.newPullParser();
             InputStream is = act.getAssets().open("songs.xml");
             myParser.setInput(is,null);
         } catch (XmlPullParserException e) {
@@ -66,7 +66,7 @@ public class XmlAdapter {
                     if (name.equals("song")&&myParser.getAttributeValue(null, "author").equals(author)){
                         String title=myParser.getAttributeValue(null, "title");
                         if(!titles.contains(title))
-                            titles.add(author);
+                            titles.add(title);
                     }
                 }
                 event = myParser.next();

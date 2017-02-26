@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         tabInit();
-        sectionsPagerAdapter.addToPage("ogniskowy",new Pair<>("Myslovits","Scenariusz dla moich sąsiadów"));
+        sectionsPagerAdapter.addToPage("ogniskowy",new Pair<>("Myslovits","My"));
         sectionsPagerAdapter.addToPage("ogniskowy",new Pair<>("Myslovits","Długość dźwięku samotności"));
     }
 
@@ -55,8 +55,8 @@ public class MainActivity extends AppCompatActivity {
     }
     private void tabInit() {
         sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-        viewPager = (ViewPager) findViewById(R.id.container);
         tabLayout = (TabLayout) findViewById(R.id.tabs);
+        viewPager = (ViewPager) findViewById(R.id.container);
         viewPager.setAdapter(sectionsPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
     }
