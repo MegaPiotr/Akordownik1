@@ -20,7 +20,7 @@ import static com.mega.piotr.akordownik.TabFragment.AUTHOR;
 
 public class MainActivity extends AppCompatActivity {
 
-    public SectionsPagerAdapter sectionsPagerAdapter;
+    public static SectionsPagerAdapter sectionsPagerAdapter;
     public ViewPager viewPager;
     public TabLayout tabLayout;
 
@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         viewPager = (ViewPager) findViewById(R.id.container);
         viewPager.setAdapter(sectionsPagerAdapter);
+        viewPager.setOffscreenPageLimit(4);
         tabLayout.setupWithViewPager(viewPager);
     }
 }

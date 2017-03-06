@@ -8,7 +8,7 @@ import java.util.List;
 
 class SectionsPagerAdapter extends FragmentPagerAdapter {
 
-    private ArrayList<String> sectionsNames= new ArrayList<>();
+    ArrayList<String> sectionsNames= new ArrayList<>();
     private ArrayList<TabFragment> fragments=new ArrayList<>();
 
     SectionsPagerAdapter(FragmentManager fm){
@@ -52,7 +52,8 @@ class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return fragments.get(position);
+        Fragment fr=fragments.get(position);
+        return fr;
     }
     @Override
     public int getCount()

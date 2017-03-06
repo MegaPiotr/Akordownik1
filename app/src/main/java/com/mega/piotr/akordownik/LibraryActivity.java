@@ -17,6 +17,7 @@ public class LibraryActivity extends AppCompatActivity implements AdapterView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_library);
+        setTitle("Wykonawcy");
         ListView lv= (ListView) findViewById(R.id.authors_list);
         XmlAdapter xmlAdapter=new XmlAdapter(this);
         adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, xmlAdapter.getAuthors());
