@@ -31,8 +31,9 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         tabInit();
-        sectionsPagerAdapter.addToPage("ogniskowy",new Pair<>("Myslovits","My"));
-        sectionsPagerAdapter.addToPage("ogniskowy",new Pair<>("Myslovits","Długość dźwięku samotności"));
+        //sectionsPagerAdapter.PagetData.clear();
+        //sectionsPagerAdapter.addToPage("ogniskowy",new Pair<>("Myslovits","My"));
+        //sectionsPagerAdapter.addToPage("ogniskowy",new Pair<>("Myslovits","Długość dźwięku samotności"));
     }
 
     @Override

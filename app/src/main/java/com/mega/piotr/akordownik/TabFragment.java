@@ -19,19 +19,12 @@ public class TabFragment extends Fragment implements AdapterView.OnItemClickList
     public final static String AUTHOR = "AUTHOR";
     public final static String TITLE = "TITLE";
     ListViewAdapter lvadapter;
-    private List<Pair<String,String>> data=new ArrayList<>();
 
-    public void add(Pair<String,String> value){
-        data.add(value);
-    }
-    public void addAll(List<Pair<String,String>> value){
-        data.addAll(value);
-    }
     @Override
     public void onResume(){
         super.onResume();
         lvadapter.clear();
-        lvadapter.addAll(data);
+        lvadapter.addAll(SectionsPagerAdapter.PagetData.get(getArguments().getInt(SectionsPagerAdapter.KEY)));
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

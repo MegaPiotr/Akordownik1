@@ -1,6 +1,8 @@
 package com.mega.piotr.akordownik;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.util.Pair;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -42,21 +44,7 @@ public class TitleActivity extends AppCompatActivity implements AdapterView.OnIt
 
     public void addButtonClick(final String title)
     {
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-        LayoutInflater inflater = getLayoutInflater();
-        View convertView = (View) inflater.inflate(R.layout.custom, null);
-        alertDialog.setView(convertView);
-        alertDialog.setTitle("List");
-        final ListView lv = (ListView) convertView.findViewById(R.id.ratatam);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,MainActivity.sectionsPagerAdapter.sectionsNames);
-        lv.setAdapter(adapter);
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                String selectedFromList = (String)(lv.getItemAtPosition(position));
-                MainActivity.sectionsPagerAdapter.addToPage(selectedFromList,new Pair<String, String>(author,title));
-            }
-        });
-        alertDialog.show();
+        DialogFragment newFragment = MyFragmentDialog.newInstance(author,title);
+        newFragment.show(getSupportFragmentManager(),"dialog");
     }
 }
