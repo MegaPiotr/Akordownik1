@@ -20,9 +20,7 @@ import static com.mega.piotr.akordownik.TabFragment.AUTHOR;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static SectionsPagerAdapter sectionsPagerAdapter;
-    public ViewPager viewPager;
-    public TabLayout tabLayout;
+    static TabListViewController controller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,15 +28,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        tabInit();
-        //sectionsPagerAdapter.PagetData.clear();
-        //sectionsPagerAdapter.addToPage("ogniskowy",new Pair<>("Myslovits","My"));
-        //sectionsPagerAdapter.addToPage("ogniskowy",new Pair<>("Myslovits","Długość dźwięku samotności"));
+        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        controller=new TabListViewController(this,sectionsPagerAdapter);
+        controller.init();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
@@ -53,13 +49,5 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-    private void tabInit() {
-        sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-        tabLayout = (TabLayout) findViewById(R.id.tabs);
-        viewPager = (ViewPager) findViewById(R.id.container);
-        viewPager.setAdapter(sectionsPagerAdapter);
-        viewPager.setOffscreenPageLimit(4);
-        tabLayout.setupWithViewPager(viewPager);
     }
 }

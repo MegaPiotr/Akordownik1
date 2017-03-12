@@ -38,7 +38,7 @@ class MyFragmentDialog extends DialogFragment
         View convertView = (View) inflater.inflate(R.layout.custom, null);
         final ListView lv = (ListView) convertView.findViewById(R.id.ratatam);
         ArrayList<String> list=new ArrayList();
-        list.addAll(MainActivity.sectionsPagerAdapter.sectionsNames);
+        list.addAll(MainActivity.controller.getPagesNames());
         list.add("Nowy");
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_list_item_1,list);
         lv.setAdapter(adapter);
@@ -51,9 +51,9 @@ class MyFragmentDialog extends DialogFragment
                 }
                 else
                 {
-                String selectedFromList = (String)(lv.getItemAtPosition(position));
-                MainActivity.sectionsPagerAdapter.addToPage(selectedFromList,new Pair<String, String>(author,title));
-                dismiss();
+                    String selectedFromList = (String)(lv.getItemAtPosition(position));
+                    MainActivity.controller.addToPage(selectedFromList,new Pair<String, String>(author,title));
+                    dismiss();
                 }
             }
         });
@@ -71,7 +71,7 @@ class MyFragmentDialog extends DialogFragment
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String m_Text = input.getText().toString();
-                MainActivity.sectionsPagerAdapter.addToPage(m_Text,new Pair<String, String>(author,title));
+                MainActivity.controller.addToPage(m_Text,new Pair<String, String>(author,title));
             }
         });
         builder.setNegativeButton("Anuluj", new DialogInterface.OnClickListener() {
