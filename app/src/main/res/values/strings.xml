@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Akordownik</string>
     <string name="action_library">Biblioteka</string>
+    <string name="action_delete">Usuń</string>
     <string name="dialog_title">Śpiewniki</string>
     <string name="menu_delete">Usuń</string>
 </resources>

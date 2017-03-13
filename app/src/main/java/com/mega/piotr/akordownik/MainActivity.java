@@ -9,9 +9,12 @@ import android.support.v4.util.Pair;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.ContextMenu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 
 import java.io.IOException;
 import java.util.List;
@@ -48,6 +51,11 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             return true;
         }
+        else if (id == R.id.action_delete) {
+            controller.removePage(controller.getSelectedPage());
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 }
+
