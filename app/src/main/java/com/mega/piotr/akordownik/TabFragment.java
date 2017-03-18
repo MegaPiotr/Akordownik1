@@ -15,7 +15,9 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -23,29 +25,40 @@ public class TabFragment extends Fragment implements AdapterView.OnItemClickList
 {
     public final static String AUTHOR = "AUTHOR";
     public final static String TITLE = "TITLE";
-    ListViewAdapter lvadapter;
+    private static HashMap<String,FragmentData> FragmentsData;
+    String name;
 
-    @Override
+    public static void setData(HashMap<String,FragmentData> data){
+        FragmentsData=data;
+    }
+    /*public void setOnDataChangeListener(OnDataChangeListener listener){
+        listeners.add(listener);
+    }*/
+    /*@Override
     public void onResume(){
         super.onResume();
-        lvadapter.clear();
-        lvadapter.addAll(MainActivity.controller.getPageData(getArguments().getInt(SectionsPagerAdapter.KEY)));
-        lvadapter.notifyDataSetChanged();
-    }
+        //lvadapter.clear();
+        //lvadapter.addAll(MainActivity.controller.getPageData(name));
+        //lvadapter.notifyDataSetChanged();
+    }*/
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.tab_fragment, container, false);
-        ListView listView = (ListView) rootView.findViewById(R.id.button_list);
         setHasOptionsMenu(true);
-        lvadapter = new ListViewAdapter(this.getActivity());
+
+        name=getArguments().getString(SectionsPagerAdapter.KEY);
+
+        ListViewAdapter lvadapter = FragmentsData.get(name).getAdapter();
+        ListView listView = (ListView) rootView.findViewById(R.id.button_list);
         listView.setAdapter(lvadapter);
         listView.setOnItemClickListener(this);
         registerForContextMenu(listView);
+
         return rootView;
     }
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Pair<String,String> pair=lvadapter.getItem(position);
+        Pair<String,String> pair=FragmentsData.get(name).getItem(position);
         Intent intent = new Intent(this.getActivity(), SongActivity.class);
         intent.putExtra(AUTHOR, pair.first);
         intent.putExtra(TITLE, pair.second);
@@ -65,10 +78,10 @@ public class TabFragment extends Fragment implements AdapterView.OnItemClickList
         switch (item.getItemId()) {
             case R.id.delete: // <-- your custom menu item id here
                 AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-                MainActivity.controller.removeFromPage(getArguments().getInt(SectionsPagerAdapter.KEY),info.position);
-                lvadapter.clear();
-                lvadapter.addAll(MainActivity.controller.getPageData(getArguments().getInt(SectionsPagerAdapter.KEY)));
-                lvadapter.notifyDataSetChanged();
+                Pair<String,String>pair=MainActivity.controler.getItemFromPage(name,info.position);
+                for (OnDataChangeListener li:FragmentsData.get(name).getListeners()) {
+                    li.onDeleteItem(name,pair);
+                }
                 return true;
             default:
                 return super.onContextItemSelected(item);

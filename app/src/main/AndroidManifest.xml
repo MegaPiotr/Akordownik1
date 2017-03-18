@@ -22,7 +22,8 @@
         <activity android:name=".SongActivity" />
         <activity android:name=".LibraryActivity" />
         <activity android:name=".TitleActivity" />
-        <activity android:name=".AddActivity"></activity>
+        <activity android:name=".AddActivity" />
+        <activity android:name=".MainMenuActivity"></activity>
     </application>
 
 </manifest>

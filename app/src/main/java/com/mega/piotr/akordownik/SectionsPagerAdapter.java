@@ -1,37 +1,46 @@
 package com.mega.piotr.akordownik;
+import android.app.Activity;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.util.Pair;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
-class SectionsPagerAdapter extends FragmentPagerAdapter {
+class SectionsPagerAdapter extends FragmentStatePagerAdapter
+{
+    public static final String KEY = "key";
+    private PagerControler controler;
 
-    static final String KEY="KEY";
-
-    SectionsPagerAdapter(FragmentManager fm){
+    SectionsPagerAdapter(PagerControler controler,FragmentManager fm){
         super(fm);
+        this.controler=controler;
     }
 
     @Override
     public Fragment getItem(int position) {
         TabFragment fr=new TabFragment();
         Bundle bd=new Bundle();
-        bd.putInt(KEY,position);
+        bd.putString(KEY, controler.getPageName(position));
         fr.setArguments(bd);
         return fr;
     }
     @Override
-    public int getCount()
-    {
-        return MainActivity.controller.getPagesCount();
+    public int getCount() {
+        return controler.getPagesCount();
     }
     @Override
-    public CharSequence getPageTitle(int position)
-    {
-        return MainActivity.controller.getPageName(position);
+    public CharSequence getPageTitle(int position) {
+        return controler.getPageName(position);
+    }
+    @Override
+    public Parcelable saveState() {
+        return null;
+    }
+
+    @Override
+    public void restoreState(Parcelable state, ClassLoader loader) {
+
     }
 }

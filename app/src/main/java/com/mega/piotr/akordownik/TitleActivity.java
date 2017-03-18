@@ -44,7 +44,7 @@ public class TitleActivity extends AppCompatActivity implements AdapterView.OnIt
 
     public void addButtonClick(final String title)
     {
-        DialogFragment newFragment = MyFragmentDialog.newInstance(author,title);
+        DialogFragment newFragment = MyFragmentDialog.newInstance(author,title,MainActivity.controler.getPagesNames());
         newFragment.show(getSupportFragmentManager(),"dialog");
     }
 }

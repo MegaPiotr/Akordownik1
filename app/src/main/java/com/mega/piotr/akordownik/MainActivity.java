@@ -23,7 +23,7 @@ import static com.mega.piotr.akordownik.TabFragment.AUTHOR;
 
 public class MainActivity extends AppCompatActivity {
 
-    static TabListViewController controller;
+    static PagerControler controler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +31,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-        controller=new TabListViewController(this,sectionsPagerAdapter);
-        controller.init();
+        controler=new PagerControler(this);
     }
 
     @Override
@@ -52,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         else if (id == R.id.action_delete) {
-            controller.removePage(controller.getSelectedPage());
+            controler.removePage(controler.getPageName(controler.getSelectedPage()));
             return true;
         }
         return super.onOptionsItemSelected(item);

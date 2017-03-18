@@ -24,11 +24,13 @@ import java.util.ArrayList;
 class MyFragmentDialog extends DialogFragment
 {
     private String author,title;
+    private ArrayList<String>names;
 
-    public static MyFragmentDialog newInstance(String author, String songTitle) {
+    public static MyFragmentDialog newInstance(String author, String songTitle, ArrayList<String>names) {
         MyFragmentDialog frag = new MyFragmentDialog();
         frag.author=author;
         frag.title=songTitle;
+        frag.names=names;
         return frag;
     }
     @Override
@@ -38,7 +40,7 @@ class MyFragmentDialog extends DialogFragment
         View convertView = (View) inflater.inflate(R.layout.custom, null);
         final ListView lv = (ListView) convertView.findViewById(R.id.ratatam);
         ArrayList<String> list=new ArrayList();
-        list.addAll(MainActivity.controller.getPagesNames());
+        list.addAll(names);
         list.add("Nowy");
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_list_item_1,list);
         lv.setAdapter(adapter);
@@ -52,7 +54,7 @@ class MyFragmentDialog extends DialogFragment
                 else
                 {
                     String selectedFromList = (String)(lv.getItemAtPosition(position));
-                    MainActivity.controller.addToPage(selectedFromList,new Pair<String, String>(author,title));
+                    MainActivity.controler.addToPage(selectedFromList,new Pair<String, String>(author,title));
                     dismiss();
                 }
             }
@@ -71,7 +73,7 @@ class MyFragmentDialog extends DialogFragment
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String m_Text = input.getText().toString();
-                MainActivity.controller.addToPage(m_Text,new Pair<String, String>(author,title));
+                MainActivity.controler.addToPage(m_Text,new Pair<String, String>(author,title));
             }
         });
         builder.setNegativeButton("Anuluj", new DialogInterface.OnClickListener() {
