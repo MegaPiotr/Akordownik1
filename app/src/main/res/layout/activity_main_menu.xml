@@ -8,6 +8,59 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/gitara3"
     tools:context="com.mega.piotr.akordownik.MainMenuActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="false"
+        android:layout_centerHorizontal="true"
+        tools:gravity="bottom"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:text="Biblioteka"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/library" />
+
+        <Button
+            android:text="Moje Śpiewniki"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/library"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/song_books" />
+
+        <Button
+            android:text="Stroik Gitarowy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/song_books"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/tuner" />
+
+        <Button
+            android:text="Metronom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tuner"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/metronom" />
+
+        <Button
+            android:text="Informacje"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/about" />
+    </LinearLayout>
 
 </RelativeLayout>

@@ -4,4 +4,5 @@
     <string name="action_delete">Usuń</string>
     <string name="dialog_title">Śpiewniki</string>
     <string name="menu_delete">Usuń</string>
+    <string name="add_song_button">Dodaj piosenkę</string>
 </resources>

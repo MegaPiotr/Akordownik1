@@ -14,11 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * Created by piotr on 18.03.2017.
- */
-
-public class PagerControler implements OnDataChangeListener{
+class PagerControler implements OnDataChangeListener{
     private SectionsPagerAdapter adapter;
     private AppCompatActivity activity;
     private TabLayout tabLayout;
@@ -27,7 +23,7 @@ public class PagerControler implements OnDataChangeListener{
     private ArrayList<String> sectionsNames= new ArrayList<>();
     private HashMap<String,FragmentData> PagerData =new HashMap<>();
 
-    public PagerControler(AppCompatActivity activity){
+    PagerControler(AppCompatActivity activity){
         adapter=new SectionsPagerAdapter(this,activity.getSupportFragmentManager());
         this.activity=activity;
         appPreference=new AppPreference(activity);
@@ -52,11 +48,11 @@ public class PagerControler implements OnDataChangeListener{
         }
     }
     public void removePage(String name) {
-        /*try {
+        try {
             appPreference.removeTab(name);
         } catch (IOException e) {
             e.printStackTrace();
-        }*/
+        }
         int position=sectionsNames.indexOf(name);
         PagerData.remove(name);
         sectionsNames.remove(name);
