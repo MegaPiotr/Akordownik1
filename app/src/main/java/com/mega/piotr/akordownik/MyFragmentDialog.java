@@ -17,10 +17,6 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-/**
- * Created by piotr on 10.03.2017.
- */
-
 class MyFragmentDialog extends DialogFragment
 {
     private String author,title;
@@ -38,7 +34,7 @@ class MyFragmentDialog extends DialogFragment
     {
         getDialog().setTitle("Śpiewniki");
         View convertView = (View) inflater.inflate(R.layout.custom, null);
-        final ListView lv = (ListView) convertView.findViewById(R.id.ratatam);
+        /*final ListView lv = (ListView) convertView.findViewById(R.id.ratatam);
         ArrayList<String> list=new ArrayList();
         list.addAll(names);
         list.add("Nowy");
@@ -58,7 +54,7 @@ class MyFragmentDialog extends DialogFragment
                     dismiss();
                 }
             }
-        });
+        });*/
         return convertView;
     }
     private void askTitle(){
@@ -69,13 +65,13 @@ class MyFragmentDialog extends DialogFragment
         input.setInputType(InputType.TYPE_CLASS_TEXT);
         builder.setView(input);
 
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        /*builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String m_Text = input.getText().toString();
                 MainActivity.controler.addToPage(m_Text,new Pair<String, String>(author,title));
             }
-        });
+        });*/
         builder.setNegativeButton("Anuluj", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

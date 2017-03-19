@@ -33,8 +33,12 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
                 startActivity(intent1);
                 break;
             case R.id.song_books:
-                Intent intent2 = new Intent(this, MainActivity.class);
-                startActivity(intent2);
+                /*Intent intent2 = new Intent(this, SongBooksActivity.class);
+                startActivity(intent2);*/
+                break;
+            case R.id.metronom:
+                /*Intent intent3 = new Intent(this, SongsssActivity.class);
+                startActivity(intent3);*/
                 break;
         }
     }
