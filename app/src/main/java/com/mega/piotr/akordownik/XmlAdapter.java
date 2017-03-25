@@ -1,6 +1,7 @@
 package com.mega.piotr.akordownik;
 
 import android.app.Activity;
+import android.support.v4.util.Pair;
 import android.text.method.ScrollingMovementMethod;
 import android.widget.TextView;
 
@@ -12,10 +13,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-
-/**
- * Created by piotr on 20.02.2017.
- */
 
 public class XmlAdapter {
 
@@ -80,7 +77,28 @@ public class XmlAdapter {
         }
         return titles;
     }
-
+    public ArrayList<Song>getAllSongs(){
+        ArrayList<Song> data = new ArrayList<>();
+        try {
+            int event = myParser.getEventType();
+            while (event != XmlPullParser.END_DOCUMENT) {
+                if (event == XmlPullParser.START_TAG) {
+                    String name = myParser.getName();
+                    if (name.equals("song")){
+                        String author=myParser.getAttributeValue(null, "author");
+                        String title=myParser.getAttributeValue(null, "title");
+                        data.add(new Song(author,title));
+                    }
+                }
+                event = myParser.next();
+            }
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
     //todo przerobić żeby zwracało dane a nie od razu z nich korzystało
     public void getDataFromXml(String author, String title) {
         try {
@@ -120,7 +138,7 @@ public class XmlAdapter {
             if (event == XmlPullParser.START_TAG) {
                 name = myParser.getName();
                 if (name.equals("text")) {
-                    while ((event = myParser.next()) != XmlPullParser.TEXT){};//czekaj
+                    while ((event = myParser.next()) != XmlPullParser.TEXT){}//czekaj
                     String songText = myParser.getText();
                     TextView textLabel = (TextView) act.findViewById(R.id.song_text);
                     textLabel.setText(songText);

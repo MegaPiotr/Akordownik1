@@ -1,4 +1,4 @@
-package com.mega.piotr.akordownik;
+package com.mega.piotr.akordownik.Activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.mega.piotr.akordownik.R;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -33,11 +35,11 @@ public class SongActivity extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         Intent intent = getIntent();
-        String author = intent.getStringExtra(TabFragment.AUTHOR);
-        String title = intent.getStringExtra(TabFragment.TITLE);
-        String fullName=author+" - "+title;
-        setTitle(fullName);
-        XmlAdapter xmlAdapter=new XmlAdapter(this);
-        xmlAdapter.getDataFromXml(author,title);
+        //String author = intent.getStringExtra(TabFragment.AUTHOR);
+        //String title = intent.getStringExtra(TabFragment.TITLE);
+        //String fullName=author+" - "+title;
+        //setTitle(fullName);
+        //XmlAdapter xmlAdapter=new XmlAdapter(this);
+        //xmlAdapter.getDataFromXml(author,title);
     }
 }

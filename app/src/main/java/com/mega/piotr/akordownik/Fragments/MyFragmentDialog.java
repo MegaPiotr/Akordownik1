@@ -1,19 +1,16 @@
-package com.mega.piotr.akordownik;
+package com.mega.piotr.akordownik.Fragments;
 
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.util.Pair;
 import android.support.v7.app.AlertDialog;
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ListView;
+
+import com.mega.piotr.akordownik.R;
 
 import java.util.ArrayList;
 
@@ -33,7 +30,7 @@ class MyFragmentDialog extends DialogFragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         getDialog().setTitle("Śpiewniki");
-        View convertView = (View) inflater.inflate(R.layout.custom, null);
+        View convertView = (View) inflater.inflate(R.layout.empty_list, null);
         /*final ListView lv = (ListView) convertView.findViewById(R.id.ratatam);
         ArrayList<String> list=new ArrayList();
         list.addAll(names);

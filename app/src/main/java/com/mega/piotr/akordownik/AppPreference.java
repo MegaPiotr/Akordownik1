@@ -33,19 +33,19 @@ public class AppPreference
         this.fileDir=context.getFilesDir();
     }
 
-    public void addItem(String tab, Pair<String,String>item) throws IOException {
+    public void addItem(String tab, Song item) throws IOException {
         if(!_tabExist(tab))
             _addTab(tab);
         _addItem(tab,item);
     }
-    public void addItems(String tab, List<Pair<String,String>> items) throws IOException {
+    public void addItems(String tab, List<Song> items) throws IOException {
         if(!_tabExist(tab))
             _addTab(tab);
-        for (Pair<String,String>item:items) {
+        for (Song item:items) {
             _addItem(tab,item);
         }
     }
-    public void removeItem(String tab, Pair<String,String>item) throws IOException {
+    public void removeItem(String tab, Song item) throws IOException {
         _removeItem(tab,item);
     }
     public void addTab(String tab) throws IOException {
@@ -58,7 +58,7 @@ public class AppPreference
         while ((line = reader.readLine()) != null)
         {
             String[]split=line.split(" - ");
-            Pair<String,String>item=new Pair<>(split[0],split[1]);
+            Song item=new Song(split[0],split[1]);
             removeItem(tab, item);
         }
         reader.close();
@@ -74,14 +74,14 @@ public class AppPreference
         reader.close();
         return names;
     }
-    public List<Pair<String,String>> getItems(String tab) throws IOException {
-        List<Pair<String,String>> items=new ArrayList<Pair<String,String>>();
+    public List<Song> getItems(String tab) throws IOException {
+        List<Song> items=new ArrayList<Song>();
         File file=new File(fileDir,tab);
         BufferedReader reader = new BufferedReader(new FileReader(file));
         String line=null;
         while ((line = reader.readLine()) != null) {
             String[]split=line.split(" - ");
-            Pair<String,String>item=new Pair<>(split[0],split[1]);
+            Song item=new Song(split[0],split[1]);
             items.add(item);
         }
         reader.close();
@@ -92,6 +92,10 @@ public class AppPreference
         PrintWriter writer = new PrintWriter(new FileWriter(tabs,true));
         writer.println(tab);
         writer.close();
+        File file=new File(fileDir,tab);
+        if (!file.exists()) {
+            file.createNewFile();
+        }
     }
     private void _removeTab(String tab) throws IOException {
         File temp1=new File(fileDir,"temp");
@@ -112,21 +116,21 @@ public class AppPreference
         tabs.delete();
         temp1.renameTo(tabs);
     }
-    private void _addItem(String tab, Pair<String,String>item) throws IOException {
+    private void _addItem(String tab, Song item) throws IOException {
         File file=new File(fileDir,tab);
         if (!file.exists()) {
             file.createNewFile();
         }
         PrintWriter writer = new PrintWriter(new FileWriter(file,true));
-        String itemString=item.first+" - "+item.second;
+        String itemString=item.author+" - "+item.title;
         writer.println(itemString);
         writer.close();
     }
-    private void _addItems(String tab,List<Pair<String,String>> items) throws IOException {
-        for (Pair<String,String> item:items)
+    private void _addItems(String tab,List<Song> items) throws IOException {
+        for (Song item:items)
             _addItem(tab,item);
     }
-    private void _removeItem(String tab, Pair<String,String> item) throws IOException {
+    private void _removeItem(String tab, Song item) throws IOException {
         File file=new File(fileDir,tab);
         File temp=new File(fileDir,"temp");
         if (!temp.exists()) {
@@ -134,7 +138,7 @@ public class AppPreference
         }
         BufferedReader reader = new BufferedReader(new FileReader(file));
         PrintWriter writer = new PrintWriter(new FileWriter(temp));
-        String itemString=item.first+" - "+item.second;
+        String itemString=item.author+" - "+item.title;
         String line=null;
         while ((line = reader.readLine()) != null) {
 

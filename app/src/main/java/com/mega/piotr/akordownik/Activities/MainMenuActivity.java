@@ -1,11 +1,12 @@
-package com.mega.piotr.akordownik;
+package com.mega.piotr.akordownik.Activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+
+import com.mega.piotr.akordownik.R;
 
 public class MainMenuActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -33,8 +34,8 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
                 startActivity(intent1);
                 break;
             case R.id.song_books:
-                /*Intent intent2 = new Intent(this, SongBooksActivity.class);
-                startActivity(intent2);*/
+                Intent intent2 = new Intent(this, SongBooksActivity.class);
+                startActivity(intent2);
                 break;
             case R.id.metronom:
                 /*Intent intent3 = new Intent(this, SongsssActivity.class);

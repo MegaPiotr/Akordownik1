@@ -7,11 +7,11 @@
         android:orderInCategory="100"
         android:title="@string/action_delete"
         app:showAsAction="ifRoom"
-        android:icon="@android:drawable/ic_delete" />
+        android:icon="@android:drawable/ic_menu_delete" />
     <item
-        android:id="@+id/action_library"
+        android:id="@+id/action_add"
         android:orderInCategory="100"
         android:title="@string/action_library"
-        android:icon="@mipmap/ic_library"
+        android:icon="@android:drawable/ic_menu_add"
         app:showAsAction="ifRoom" />
 </menu>

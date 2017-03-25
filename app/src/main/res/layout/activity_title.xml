@@ -8,13 +8,11 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.mega.piotr.akordownik.TitleActivity">
-
-    <ListView
-        android:layout_width="match_parent"
+    tools:context="com.mega.piotr.akordownik.Activities.TitleActivity">
+    <fragment
+        android:name="com.mega.piotr.akordownik.Fragments.TitleAuthorFragment"
+        android:id="@+id/title_fragment"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:id="@+id/song_list"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        tools:layout="@layout/empty_list" />
 </RelativeLayout>
