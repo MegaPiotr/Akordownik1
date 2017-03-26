@@ -5,7 +5,7 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.mega.piotr.akordownik.Activities.SongBooksActivity;
-import com.mega.piotr.akordownik.CheckSong;
+
 import com.mega.piotr.akordownik.R;
 import com.mega.piotr.akordownik.Song;
 
@@ -17,7 +17,7 @@ public class CheckedListViewAdapter extends ButtonListViewAdapter {
 
     @Override
     protected void initButton(int position, View convertView) {
-        ImageButton button=(ImageButton)convertView.findViewById(R.id.imageButton);
+        /*ImageButton button=(ImageButton)convertView.findViewById(R.id.imageButton);
         CheckSong song=(CheckSong)getItem(position);
         button.setTag(R.string.key_const,song);
         setImage(button,song);
@@ -35,12 +35,12 @@ public class CheckedListViewAdapter extends ButtonListViewAdapter {
                 }
                 setImage((ImageButton)view,song);
             }
-        });
+        });*/
     }
-    private void setImage(ImageButton button,CheckSong song){
-        if(song.checked)
+    private void setImage(ImageButton button){
+        /*if(song.checked)
             button.setImageResource(android.R.drawable.checkbox_on_background);
         else
-            button.setImageResource(android.R.drawable.checkbox_off_background);
+            button.setImageResource(android.R.drawable.checkbox_off_background);*/
     }
 }

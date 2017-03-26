@@ -15,6 +15,8 @@ import com.mega.piotr.akordownik.R;
 
 public class LibraryActivity extends AppCompatActivity {
 
+    public static final String author_key="author";
+    public static final String songBook_key="author";
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
 

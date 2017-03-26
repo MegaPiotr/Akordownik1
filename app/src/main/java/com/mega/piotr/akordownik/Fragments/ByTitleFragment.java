@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.mega.piotr.akordownik.Activities.LibraryActivity;
 import com.mega.piotr.akordownik.ListViewAdapters.ListViewAdapter;
 import com.mega.piotr.akordownik.R;
 import com.mega.piotr.akordownik.Song;
@@ -23,9 +24,10 @@ public class ByTitleFragment extends Fragment implements AdapterView.OnItemClick
 
         ListView lv= (ListView) view.findViewById(R.id.universal_list);
         ArrayList<Song> songs = getData();
+        String author=getActivity().getIntent().getStringExtra(LibraryActivity.author_key);
 
-        ListViewAdapter adapter=getAdapter();
-        adapter.addAll(songs);
+        ListViewAdapter adapter=getAdapter(songs);
+        adapter.getFilter().filter(author);
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(this);
         return view;
@@ -38,8 +40,8 @@ public class ByTitleFragment extends Fragment implements AdapterView.OnItemClick
         return songs;
     }
 
-    protected ListViewAdapter getAdapter(){
-        return new ListViewAdapter(this.getActivity());
+    protected ListViewAdapter getAdapter(ArrayList<Song>songs){
+        return new ListViewAdapter(this.getActivity(),songs);
     }
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {

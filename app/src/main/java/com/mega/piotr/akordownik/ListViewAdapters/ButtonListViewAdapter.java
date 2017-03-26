@@ -15,12 +15,14 @@ import com.mega.piotr.akordownik.Activities.SongBooksActivity;
 import com.mega.piotr.akordownik.R;
 import com.mega.piotr.akordownik.Song;
 
+import java.util.ArrayList;
+
 import static android.R.drawable.ic_menu_edit;
 
 public class ButtonListViewAdapter extends ListViewAdapter {
     protected AppCompatActivity activity;
     public ButtonListViewAdapter(AppCompatActivity activity) {
-        super(activity.getApplicationContext());
+        super(activity.getApplicationContext(),new ArrayList<Song>());
         this.activity=activity;
     }
     @Override
@@ -37,14 +39,14 @@ public class ButtonListViewAdapter extends ListViewAdapter {
 
     protected void initButton(int position, View convertView) {
         ImageButton button=(ImageButton)convertView.findViewById(R.id.imageButton);
-        button.setTag(R.string.key_const,getItem(position));
+        //button.setTag(R.string.key_const,getItem(position));
         //button.setImageResource();
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Song song=(Song)((ImageButton)view).getTag(R.string.key_const);
-                ((SongBooksActivity)activity).removeItemFromCurrentTab(song);
-            }
-        });
+        //button.setOnClickListener(new View.OnClickListener() {
+            //@Override
+            //public void onClick(View view) {
+                //Song song=(Song)((ImageButton)view).getTag(R.string.key_const);
+                //((SongBooksActivity)activity).removeItemFromCurrentTab(song);
+            //}
+        //});
     }
 }

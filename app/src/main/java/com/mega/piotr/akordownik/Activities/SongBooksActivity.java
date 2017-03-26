@@ -56,9 +56,9 @@ public class SongBooksActivity extends AppCompatActivity implements AdapterView.
             @Override
             public void onClick(View view) {
                 Intent intent1 = new Intent(getApplicationContext(),LibraryActivity.class);
-                Bundle bundle=new Bundle();
-                bundle.putString(getResources().getString(R.string.key_const),getSelectedTabName());
-                intent1.putExtra(getResources().getString(R.string.key_const),bundle);
+                //Bundle bundle=new Bundle();
+                //bundle.putString(getResources().getString(R.string.key_const),getSelectedTabName());
+                //intent1.putExtra(getResources().getString(R.string.key_const),bundle);
                 startActivity(intent1);
             }
         });
@@ -70,20 +70,20 @@ public class SongBooksActivity extends AppCompatActivity implements AdapterView.
         ArrayList<String> names=new ArrayList<>();
         appPreference=new AppPreference(this);
         try {
-            names=(ArrayList)appPreference.getTabNames();
+            names=(ArrayList<String>)appPreference.getTabNames();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, names);
+        dataAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, names);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(dataAdapter);
 
         spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                ArrayList<Song>items=new ArrayList<Song>();
+                ArrayList<Song>items;
                 try {
-                    items=(ArrayList)appPreference.getItems(dataAdapter.getItem(position));
+                    items=(ArrayList<Song>)appPreference.getItems(dataAdapter.getItem(position));
                     adapter.clear();
                     adapter.addAll(items);
                 } catch (IOException e) {

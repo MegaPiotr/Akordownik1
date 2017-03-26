@@ -10,7 +10,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.mega.piotr.akordownik.Activities.TitleActivity">
     <fragment
-        android:name="com.mega.piotr.akordownik.Fragments.TitleAuthorFragment"
+        android:name="com.mega.piotr.akordownik.Fragments.ByTitleFragment"
         android:id="@+id/title_fragment"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
