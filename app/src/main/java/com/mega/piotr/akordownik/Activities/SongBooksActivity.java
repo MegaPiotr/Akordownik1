@@ -3,7 +3,6 @@ package com.mega.piotr.akordownik.Activities;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.util.Pair;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -23,20 +22,22 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.mega.piotr.akordownik.AppPreference;
-import com.mega.piotr.akordownik.ListViewAdapters.ButtonListViewAdapter;
-import com.mega.piotr.akordownik.ListViewAdapters.ListViewAdapter;
+import com.mega.piotr.akordownik.ListViewAdapters.ButtonListView2Adapter;
+import com.mega.piotr.akordownik.ListViewAdapters.ListView2Adapter;
 import com.mega.piotr.akordownik.R;
 import com.mega.piotr.akordownik.Song;
+import com.mega.piotr.akordownik.SongBookHolder;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class SongBooksActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class SongBooksActivity extends AppCompatActivity implements AdapterView.OnItemClickListener,SongBookHolder.UpdateDataListener {
 
-    private ArrayAdapter<String> dataAdapter;
-    private ListViewAdapter adapter;
+    private ArrayAdapter<String> spinnerAdapter;
+    private ListView2Adapter adapter;
     private AppPreference appPreference;
-    Spinner spinner;
+    private Spinner spinner;
+    private ArrayList<Song>items=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,25 +47,31 @@ public class SongBooksActivity extends AppCompatActivity implements AdapterView.
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         listViewInit();
-
         spinnerInit();
-
+        fabInit();
+        SongBookHolder.getInstance().setUpdateDataListener(this);
+    }
+    private void fabInit() {
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent1 = new Intent(getApplicationContext(),LibraryActivity.class);
-                //Bundle bundle=new Bundle();
-                //bundle.putString(getResources().getString(R.string.key_const),getSelectedTabName());
-                //intent1.putExtra(getResources().getString(R.string.key_const),bundle);
+                intent1.putExtra(LibraryActivity.check_key,true);
+                ArrayList<Song> items=new ArrayList<>();
+                try {
+                    items=(ArrayList<Song>)appPreference.getItems(getSelectedTabName());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 startActivity(intent1);
             }
         });
-
     }
-
     private void spinnerInit() {
         spinner = (Spinner) findViewById(R.id.spinner);
         ArrayList<String> names=new ArrayList<>();
@@ -74,21 +81,23 @@ public class SongBooksActivity extends AppCompatActivity implements AdapterView.
         } catch (IOException e) {
             e.printStackTrace();
         }
-        dataAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, names);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(dataAdapter);
+        spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, names);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(spinnerAdapter);
 
         spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                ArrayList<Song>items;
                 try {
-                    items=(ArrayList<Song>)appPreference.getItems(dataAdapter.getItem(position));
+                    items=(ArrayList<Song>)appPreference.getItems(spinnerAdapter.getItem(position));
                     adapter.clear();
                     adapter.addAll(items);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                SongBookHolder holder=SongBookHolder.getInstance();
+                holder.clear();
+                holder.addAll(items);
             }
 
             @Override
@@ -98,10 +107,9 @@ public class SongBooksActivity extends AppCompatActivity implements AdapterView.
             }
         });
     }
-
     private void listViewInit() {
         ListView lv= (ListView) findViewById(R.id.song_books_list);
-        adapter = new ButtonListViewAdapter(this);
+        adapter = new ButtonListView2Adapter(this,R.layout.listview_image_2_item,new ArrayList<Song>());
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(this);
     }
@@ -128,13 +136,19 @@ public class SongBooksActivity extends AppCompatActivity implements AdapterView.
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
     }
+    @Override
+    public void update(ArrayList<Song> songs) {
+        //for (Song s:songs) {
+        //    if(songs.contains(s))
+        //}
+    }
 
     public String getSelectedTabName(){
         return spinner.getSelectedItem().toString();
     }
     public void removeCurrentTab(){
         String name=getSelectedTabName();
-        dataAdapter.remove(name);
+        spinnerAdapter.remove(name);
         try {
             appPreference.removeTab(name);
         } catch (IOException e) {
@@ -142,13 +156,14 @@ public class SongBooksActivity extends AppCompatActivity implements AdapterView.
         }
     }
     public void addTab(String name){
-        dataAdapter.add(name);
+        spinnerAdapter.add(name);
         try {
             appPreference.addTab(name);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        spinner.setSelection(dataAdapter.getCount()-1);
+        spinner.setSelection(spinnerAdapter.getCount()-1);
+        populate();//do testów
     }
     public void removeItemFromCurrentTab(Song item){
         String name=getSelectedTabName();
@@ -188,5 +203,16 @@ public class SongBooksActivity extends AppCompatActivity implements AdapterView.
         });
         builder.setNegativeButton("Anuluj", null);
         builder.show();
+    }
+
+    public void populate() {
+        addItemToCurrentTab(new Song("Elektryczne Gitary","Przewróciło się"));
+        addItemToCurrentTab(new Song("Elektryczne Gitary","Wytrąciłaś mnie"));
+        addItemToCurrentTab(new Song("Elektryczne Gitary","Co ja tutaj robię"));
+    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

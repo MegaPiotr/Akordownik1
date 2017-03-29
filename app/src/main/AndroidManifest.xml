@@ -39,7 +39,7 @@
             android:theme="@android:style/Theme.Translucent" />
         <activity
             android:name=".Activities.LibraryActivity"
-            android:label="@string/title_activity_library2"
+            android:label="@string/title_activity_library"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activities.TitleActivity" />
     </application>

@@ -20,9 +20,9 @@ public class ByAuthorFragment extends Fragment implements AdapterView.OnItemClic
     private ArrayAdapter adapter;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_library, container, false);
+        View view=inflater.inflate(R.layout.empty_list, container, false);
         getActivity().setTitle("Wykonawcy");
-        ListView lv= (ListView) view.findViewById(R.id.authors_list);
+        ListView lv= (ListView) view.findViewById(R.id.universal_list);
         XmlAdapter xmlAdapter=new XmlAdapter(this.getActivity());
         adapter = new ArrayAdapter<>(this.getActivity(), android.R.layout.simple_list_item_1, xmlAdapter.getAuthors());
         lv.setAdapter(adapter);
@@ -35,6 +35,7 @@ public class ByAuthorFragment extends Fragment implements AdapterView.OnItemClic
         String author = (String) adapter.getItem(position);
         Intent intent = new Intent(this.getActivity(), TitleActivity.class);
         intent.putExtra(LibraryActivity.author_key, author);
+        intent.putExtra(LibraryActivity.check_key, getActivity().getIntent().getBooleanExtra(LibraryActivity.check_key,false));
         startActivity(intent);
     }
 }

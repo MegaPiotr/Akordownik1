@@ -10,28 +10,29 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 
 import com.mega.piotr.akordownik.Fragments.ByAuthorFragment;
-import com.mega.piotr.akordownik.Fragments.ByTitleFragment;
+import com.mega.piotr.akordownik.Fragments.ByTitle2Fragment;
 import com.mega.piotr.akordownik.R;
 
 public class LibraryActivity extends AppCompatActivity {
 
     public static final String author_key="author";
-    public static final String songBook_key="author";
+    public static final String check_key="check";
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_library2);
+        setContentView(R.layout.activity_library);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
     }
-
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
@@ -44,7 +45,7 @@ public class LibraryActivity extends AppCompatActivity {
                 case 0:
                     return new ByAuthorFragment();
                 case 1:
-                    return new ByTitleFragment();
+                    return new ByTitle2Fragment();
                 default:
                     return new ByAuthorFragment();
             }
@@ -54,5 +55,11 @@ public class LibraryActivity extends AppCompatActivity {
         public int getCount() {
             return 2;
         }
+
+    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

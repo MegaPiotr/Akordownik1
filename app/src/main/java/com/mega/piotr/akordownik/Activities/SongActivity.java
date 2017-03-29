@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.mega.piotr.akordownik.R;
+import com.mega.piotr.akordownik.XmlAdapter;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -30,16 +31,23 @@ public class SongActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_song);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
     @Override
     public void onResume() {
         super.onResume();
         Intent intent = getIntent();
-        //String author = intent.getStringExtra(TabFragment.AUTHOR);
-        //String title = intent.getStringExtra(TabFragment.TITLE);
+        String author = intent.getStringExtra("author");
+        String title = intent.getStringExtra("title");
         //String fullName=author+" - "+title;
         //setTitle(fullName);
-        //XmlAdapter xmlAdapter=new XmlAdapter(this);
-        //xmlAdapter.getDataFromXml(author,title);
+        XmlAdapter xmlAdapter=new XmlAdapter(this);
+        xmlAdapter.getDataFromXml(author,title);
+    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }
