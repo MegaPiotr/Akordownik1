@@ -38,8 +38,8 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
                 startActivity(intent2);
                 break;
             case R.id.metronom:
-                /*Intent intent3 = new Intent(this, SongsssActivity.class);
-                startActivity(intent3);*/
+                Intent intent3 = new Intent(this, ChordBookActivity.class);
+                startActivity(intent3);
                 break;
         }
     }
