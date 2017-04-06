@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main_menu"
     android:layout_width="match_parent"
@@ -8,59 +8,66 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@drawable/gitara3"
+    android:orientation="vertical"
+    android:background="@color/colorWindowBackgroung"
     tools:context="com.mega.piotr.akordownik.Activities.MainMenuActivity">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="false"
-        android:layout_centerHorizontal="true"
-        tools:gravity="bottom"
-        android:layout_alignParentBottom="true">
+        android:textColor="#ff9920"
+        android:textSize="50dp"
+        android:layout_gravity="center"
+        android:text="Ogniskowy" />
 
-        <Button
-            android:text="Biblioteka"
-            android:layout_width="match_parent"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/telko"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:id="@+id/library" />
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:orientation="vertical">
 
-        <Button
-            android:text="Moje Śpiewniki"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/library"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:id="@+id/song_books" />
+            <Button
+                android:id="@+id/library"
+                style="@style/MenuButton"
+                android:text="Biblioteka" />
 
-        <Button
-            android:text="Stroik Gitarowy"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/song_books"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:id="@+id/tuner" />
+            <Button
+                android:id="@+id/song_books"
+                style="@style/MenuButton"
+                android:enabled="true"
+                android:text="Śpiewniki" />
 
-        <Button
-            android:text="Metronom"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tuner"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:id="@+id/metronom" />
+            <Button
+                android:id="@+id/tuner"
+                style="@style/MenuButton"
+                android:enabled="false"
+                android:text="Stroik" />
 
-        <Button
-            android:text="Informacje"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/about" />
-    </LinearLayout>
+            <Button
+                android:id="@+id/metronom"
+                style="@style/MenuButton"
+                android:enabled="false"
+                android:text="Metronom" />
 
-</RelativeLayout>
+            <Button
+                android:id="@+id/chords"
+                style="@style/MenuButton"
+                android:text="Akordy" />
+
+            <Button
+                android:id="@+id/about"
+                style="@style/MenuButton"
+                android:enabled="false"
+                android:text="Informacje" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

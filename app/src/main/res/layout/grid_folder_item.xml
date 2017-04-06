@@ -2,16 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@android:drawable/btn_star"
+    android:background="@mipmap/ic_folder"
     android:padding="5dp" >
 
     <TextView
         android:id="@+id/grid_item_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:text="@+id/label"
         android:layout_marginTop="5px"
-        android:textSize="15px" >
+        android:textStyle="bold"
+        android:gravity="center"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:textSize="50px" >
     </TextView>
 
 </LinearLayout>

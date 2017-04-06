@@ -24,11 +24,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activities.SongActivity" />
-        <!-- This meta-data tag is required to use Google Play Services. -->
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
         <activity
             android:name=".Activities.SongBooksActivity"
             android:label="@string/title_activity_song_books"
@@ -42,7 +40,10 @@
             android:label="@string/title_activity_library"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activities.TitleActivity" />
-        <activity android:name=".Activities.ChordBookActivity"></activity>
+        <activity android:name=".Activities.ChordBookActivity"
+            android:theme="@style/AppTheme.MyActionBar"/>
+        <activity android:name=".Activities.ChordActivity">
+        </activity>
     </application>
 
 </manifest>

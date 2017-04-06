@@ -19,11 +19,13 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
         Button tuner = (Button) findViewById(R.id.tuner);
         Button metronom = (Button) findViewById(R.id.metronom);
         Button about = (Button) findViewById(R.id.about);
+        Button chords = (Button) findViewById(R.id.chords);
         library.setOnClickListener(this);
         songBooks.setOnClickListener(this);
         tuner.setOnClickListener(this);
         metronom.setOnClickListener(this);
         about.setOnClickListener(this);
+        chords.setOnClickListener(this);
     }
 
     @Override
@@ -37,7 +39,7 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
                 Intent intent2 = new Intent(this, SongBooksActivity.class);
                 startActivity(intent2);
                 break;
-            case R.id.metronom:
+            case R.id.chords:
                 Intent intent3 = new Intent(this, ChordBookActivity.class);
                 startActivity(intent3);
                 break;

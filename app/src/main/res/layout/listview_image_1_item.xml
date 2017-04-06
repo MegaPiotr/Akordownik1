@@ -13,6 +13,7 @@
         android:id="@+id/lvtitle"
         android:layout_gravity="center_vertical"
         android:layout_weight="1"
+        style="@style/TextControlls"
         android:textSize="22sp"/>
 
     <ImageButton

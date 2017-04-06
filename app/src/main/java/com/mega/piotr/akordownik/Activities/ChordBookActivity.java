@@ -1,6 +1,7 @@
 package com.mega.piotr.akordownik.Activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
@@ -20,7 +21,7 @@ import com.mega.piotr.akordownik.R;
 public class ChordBookActivity extends AppCompatActivity {
 
     GridView gridView;
-
+    public static final String chord="chord";
     static final String[] numbers = new String[] {
             "A", "a" ,"B","b","C","c","C#","c#","D","d","D#","d#","E","e","F","f","F#","f#","G","g","G#","g#"};
 
@@ -37,10 +38,11 @@ public class ChordBookActivity extends AppCompatActivity {
         gridView.setAdapter(adapter);
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View v,
-                                    int position, long id) {
-                Toast.makeText(getApplicationContext(),
-                        ((TextView) v).getText(), Toast.LENGTH_SHORT).show();
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                String item=(String)parent.getItemAtPosition(position);
+                Intent intent=new Intent(ChordBookActivity.this, ChordActivity.class);
+                intent.putExtra(chord,item);
+                startActivity(intent);
             }
         });
 
@@ -60,16 +62,12 @@ public class ChordBookActivity extends AppCompatActivity {
             View gridView;
 
             if (convertView == null) {
-
-                gridView = new View(context);
-
                 gridView = inflater.inflate(R.layout.grid_folder_item, null);
-
                 TextView textView = (TextView) gridView.findViewById(R.id.grid_item_label);
                 textView.setText(strings[position]);
 
             } else {
-                gridView = (View) convertView;
+                gridView = convertView;
             }
 
             return gridView;
