@@ -14,7 +14,7 @@
         android:verticalSpacing="0dp"
         android:horizontalSpacing="0dp"
         android:stretchMode="columnWidth"
-        android:numColumns="4" >
+        android:numColumns="3" >
 
     </GridView>
 </android.support.constraint.ConstraintLayout>

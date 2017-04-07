@@ -23,7 +23,7 @@ public class ChordBookActivity extends AppCompatActivity {
     GridView gridView;
     public static final String chord="chord";
     static final String[] numbers = new String[] {
-            "A", "a" ,"B","b","C","c","C#","c#","D","d","D#","d#","E","e","F","f","F#","f#","G","g","G#","g#"};
+            "A","B","C","C#","D","D#","E","F","F#","G","G#"};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,19 +58,13 @@ public class ChordBookActivity extends AppCompatActivity {
         }
         public View getView(int position, View convertView, ViewGroup parent) {
 
-            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View gridView;
-
             if (convertView == null) {
-                gridView = inflater.inflate(R.layout.grid_folder_item, null);
-                TextView textView = (TextView) gridView.findViewById(R.id.grid_item_label);
+                LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                convertView = inflater.inflate(R.layout.grid_folder_item, null);
+                TextView textView = (TextView) convertView.findViewById(R.id.grid_item_label);
                 textView.setText(strings[position]);
-
-            } else {
-                gridView = convertView;
             }
-
-            return gridView;
+            return convertView;
         }
     }
 }

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="a_names">
+        <item>a</item>
+        <item>A</item>
+    </string-array>
+    <integer-array name="a_res">
+        <item>@drawable/amol_1</item>
+        <item>@drawable/adur_1</item>
+    </integer-array>
+</resources>
