@@ -16,6 +16,8 @@ import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.doubleclick.PublisherAdRequest;
+import com.google.android.gms.ads.doubleclick.PublisherAdView;
 import com.mega.piotr.akordownik.R;
 
 public class ChordBookActivity extends AppCompatActivity {
@@ -30,6 +32,9 @@ public class ChordBookActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_chord_book);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        setTitle("Akordy");
 
         gridView = (GridView) findViewById(R.id.gridView1);
 
@@ -45,7 +50,16 @@ public class ChordBookActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        PublisherAdView mAdView = (PublisherAdView) findViewById(R.id.ad_view);
+        PublisherAdRequest adRequest = new PublisherAdRequest.Builder()
+                .build();
+        mAdView.loadAd(adRequest);
 
+    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
     class MyGridAdapter extends ArrayAdapter<String>{
 

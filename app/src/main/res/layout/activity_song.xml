@@ -1,41 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_song"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@color/colorWindowBackgroung"
     tools:context="com.mega.piotr.akordownik.Activities.SongActivity">
 
-        <LinearLayout
-            android:orientation="horizontal"
+    <ScrollView
+        android:id="@+id/song_scroller"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
+
+        <TextView
+            android:id="@+id/song_text"
+            style="@style/TextControlls"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
+            android:layout_weight="1"
+            android:ems="10"
+            android:gravity="center"
+            android:inputType="textMultiLine"
+            android:scrollHorizontally="false"
+            android:textSize="@dimen/song_text_size" />
+    </ScrollView>
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_alignParentRight="true"
+        android:background="@null"
+        android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inputType="textMultiLine"
-                android:ems="10"
-                android:id="@+id/song_text"
-                android:layout_weight="1"
-                android:scrollHorizontally="false" />
+        <ImageButton
+            android:id="@+id/btnPlus"
+            app:srcCompat="@drawable/ic_zoom_in"
+            style="@style/SongButton" />
+        <ImageButton
+            android:id="@+id/btnMinus"
+            app:srcCompat="@drawable/ic_zoom_out"
+            style="@style/SongButton" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:background="@null"
+        android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:inputType="textMultiLine"
-                android:ems="10"
-                android:id="@+id/song_chords"
-                android:layout_weight="1"
-                android:scrollbars = "vertical"/>
-        </LinearLayout>
+        <ImageButton
+            android:id="@+id/btnFaster"
+            app:srcCompat="@drawable/ic_arrow_drop_up"
+            style="@style/SongButton" />
+        <ImageButton
+            android:id="@+id/btnSlower"
+            app:srcCompat="@drawable/ic_arrow_drop_down"
+            style="@style/SongButton" />
+    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/timer"
+        android:text="0"
+        style="@style/TextControlls"
+        android:layout_weight="1"
+        android:gravity="center" />
+
 
 </RelativeLayout>

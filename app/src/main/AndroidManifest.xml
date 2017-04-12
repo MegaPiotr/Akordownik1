@@ -15,6 +15,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".Activities.MainMenuActivity"
+            android:screenOrientation="portrait"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -23,27 +24,26 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.SongActivity" />
+        <activity android:name=".Activities.SongActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:theme="@style/AppTheme.MyActionBar"/>
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-        <activity
-            android:name=".Activities.SongBooksActivity"
+        <activity android:name=".Activities.SongBooksActivity"
             android:label="@string/title_activity_song_books"
-            android:theme="@style/AppTheme.NoActionBar" /> <!-- Include the AdActivity configChanges and theme. -->
-        <activity
-            android:name="com.google.android.gms.ads.AdActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
-            android:theme="@android:style/Theme.Translucent" />
-        <activity
-            android:name=".Activities.LibraryActivity"
-            android:label="@string/title_activity_library"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activities.TitleActivity" />
+        <activity android:name=".Activities.LibraryActivity"
+            android:label="@string/title_activity_library"
+            android:windowSoftInputMode="adjustPan"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".Activities.TitleActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:theme="@style/AppTheme.MyActionBar"/>
         <activity android:name=".Activities.ChordBookActivity"
             android:theme="@style/AppTheme.MyActionBar"/>
-        <activity android:name=".Activities.ChordActivity">
-        </activity>
+        <activity android:name=".Activities.ChordActivity"
+            android:theme="@style/AppTheme.MyActionBar"/>
     </application>
 
 </manifest>

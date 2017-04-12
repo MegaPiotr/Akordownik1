@@ -6,7 +6,16 @@
     android:layout_height="match_parent"
     android:id="@+id/item_layout"
     android:descendantFocusability="blocksDescendants">
-
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_gravity="center_horizontal"
+        android:tint="@color/colorPrimary"
+        android:paddingBottom="@dimen/image_padding"
+        android:paddingTop="@dimen/image_padding"
+        app:srcCompat="@drawable/note" />
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -14,22 +23,12 @@
         android:layout_weight="1">
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/lvtitle"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
-            style="@style/TextControlls"
-            android:textSize="22sp"/>
+            style="@style/ItemText1"/>
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/lvauthor"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
-            android:background="@color/colorPrimary"
-            android:textSize="20sp"/>
+            style="@style/ItemText2"/>
 
     </LinearLayout>
 
@@ -38,8 +37,7 @@
         android:layout_height="match_parent"
         android:src="@android:drawable/ic_delete"
         android:id="@+id/imageButton"
-        android:layout_gravity="center_vertical"
         android:background="@null"
-        android:layout_weight="1" />
+        android:layout_weight="1"/>
 
 </LinearLayout>

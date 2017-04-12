@@ -36,9 +36,46 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">20sp</item>
     </style>
+    <style name="ItemText1">
+        <item name="android:background">@android:color/black</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingBottom">4dp</item>
+        <item name="android:textSize">@dimen/item_text_size1</item>
+    </style>
+    <style name="ItemText2">
+        <item name="android:background">#870000</item>
+        <item name="android:textColor">#FFC000</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingBottom">4dp</item>
+        <item name="android:textSize">@dimen/item_text_size2</item>
+    </style>
     <style name="TextControlls">
         <item name="android:background">@android:color/black</item>
         <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+    <style name="SongButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">2dp</item>
+        <item name="android:scaleType">fitXY</item>
+        <item name="android:background">#50ffffff</item>
+    </style>
+    <style name="ImageItem">
+        <item name="android:layout_width">35dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:tint">@color/colorPrimary</item>
+        <item name="android:paddingBottom">@dimen/image_padding</item>
+        <item name="android:paddingTop">@dimen/image_padding</item>
     </style>
 </resources>
 

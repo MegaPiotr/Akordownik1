@@ -30,7 +30,7 @@ class MyFragmentDialog extends DialogFragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         getDialog().setTitle("Śpiewniki");
-        View convertView = (View) inflater.inflate(R.layout.empty_list, null);
+        View convertView = (View) inflater.inflate(R.layout.song_list, null);
         /*final ListView lv = (ListView) convertView.findViewById(R.id.ratatam);
         ArrayList<String> list=new ArrayList();
         list.addAll(names);

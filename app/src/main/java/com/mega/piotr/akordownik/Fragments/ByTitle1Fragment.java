@@ -1,21 +1,24 @@
 package com.mega.piotr.akordownik.Fragments;
 
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SearchView;
 
 import com.mega.piotr.akordownik.Activities.LibraryActivity;
 import com.mega.piotr.akordownik.Activities.SongActivity;
 import com.mega.piotr.akordownik.ListViewAdapters.CheckListView1Adapter;
-import com.mega.piotr.akordownik.ListViewAdapters.CheckListView2Adapter;
 import com.mega.piotr.akordownik.ListViewAdapters.ListView1Adapter;
-import com.mega.piotr.akordownik.ListViewAdapters.ListView2Adapter;
 import com.mega.piotr.akordownik.R;
 import com.mega.piotr.akordownik.Song;
 import com.mega.piotr.akordownik.XmlAdapter;
@@ -26,15 +29,36 @@ public class ByTitle1Fragment extends Fragment implements AdapterView.OnItemClic
 
     private String author;
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.empty_list, container, false);
+        View view=inflater.inflate(R.layout.song_list, container, false);
 
         ListView lv= (ListView) view.findViewById(R.id.universal_list);
         author=getActivity().getIntent().getStringExtra(LibraryActivity.author_key);
         ArrayList<Song> songs = getData();
+        if(author!=null)
+            getActivity().setTitle(author);
+        else
+            getActivity().setTitle("Piosenki");
 
-        ArrayAdapter<Song> adapter=getAdapter(songs);
+        final ArrayAdapter<Song> adapter=getAdapter(songs);
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(this);
+
+        SearchView searchView=(SearchView)view.findViewById(R.id.search);
+        EditText searchEdit=(EditText)(searchView.findViewById(searchView.getContext().getResources().getIdentifier("android:id/search_src_text", null, null)));
+        searchEdit.setTextColor(ContextCompat.getColor(this.getContext(),R.color.colorPrimary));
+        searchEdit.setHintTextColor(ContextCompat.getColor(this.getContext(),R.color.colorPrimary));
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
         return view;
     }
 

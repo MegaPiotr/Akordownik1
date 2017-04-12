@@ -27,13 +27,15 @@ public class ChordActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chord);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         final GridView gv=(GridView)findViewById(R.id.chordGridView);
         String key=getIntent().getStringExtra(ChordBookActivity.chord);
+        setTitle(key);
         ArrayAdapter<GridItem> adapter = new MyGridAdapter(this,getChordsInfo(key));
 
         gv.setAdapter(adapter);
-
         gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 FragmentManager fm = getSupportFragmentManager();
@@ -47,8 +49,10 @@ public class ChordActivity extends AppCompatActivity {
         TypedArray img;
         int arryidres = this.getResources().getIdentifier(key.toLowerCase()+"_res", "array", this.getPackageName());
         img = getResources().obtainTypedArray(arryidres);
+
         int arryidname = this.getResources().getIdentifier(key.toLowerCase()+"_names", "array", this.getPackageName());
         String[]names  = this.getResources().getStringArray(arryidname);
+
         ArrayList<GridItem> items=new ArrayList<>();
         int length=img.length()>names.length?names.length:img.length();
         for(int i=0;i<length;i++){
@@ -56,6 +60,11 @@ public class ChordActivity extends AppCompatActivity {
             items.add(item);
         }
         return items;
+    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
     public class GridItem
     {
