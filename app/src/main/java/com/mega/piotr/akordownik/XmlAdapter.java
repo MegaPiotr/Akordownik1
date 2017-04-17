@@ -16,11 +16,14 @@ import java.util.List;
 
 public class XmlAdapter {
 
-    private XmlPullParser myParser;
     private Activity act;
 
     public XmlAdapter(Activity act){
         this.act=act;
+    }
+
+    private XmlPullParser createParser() {
+        XmlPullParser myParser=null;
         try {
             XmlPullParserFactory xmlFactoryObject = XmlPullParserFactory.newInstance();
             myParser = xmlFactoryObject.newPullParser();
@@ -31,22 +34,38 @@ public class XmlAdapter {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return myParser;
+    }
+    private int goToEvent(XmlPullParser myParser,int value) throws IOException, XmlPullParserException {
+        int event=0;
+        while(event!=value&&event!=XmlPullParser.END_DOCUMENT){
+            event=myParser.next();
+        }
+        return event;
+    }
+    private int goToSection(XmlPullParser myParser, String title) throws IOException, XmlPullParserException {
+        String name = "";
+        int event=goToEvent(myParser, XmlPullParser.START_TAG);
+        while (event != XmlPullParser.END_DOCUMENT){
+            name = myParser.getName();
+            if(name.equals(title))
+                break;
+            event=goToEvent(myParser, XmlPullParser.START_TAG);
+        }
+        return event;
     }
 
     public List<String> getAuthors(){
+        XmlPullParser myParser=createParser();
         ArrayList<String> authors = new ArrayList<>();
         try {
             int event = myParser.getEventType();
+            event=goToSection(myParser,"author");
             while (event != XmlPullParser.END_DOCUMENT) {
-                if (event == XmlPullParser.START_TAG) {
-                    String name = myParser.getName();
-                    if (name.equals("song")){
-                        String author=myParser.getAttributeValue(null, "author");
-                        if(!authors.contains(author))
-                            authors.add(author);
-                    }
-                }
-                event = myParser.next();
+                String name=myParser.getName();
+                String author=myParser.getAttributeValue(null,"author");
+                authors.add(author);
+                event=goToSection(myParser,"author");
             }
         } catch (XmlPullParserException e) {
             e.printStackTrace();
@@ -55,20 +74,26 @@ public class XmlAdapter {
         }
         return authors;
     }
-    public List<String> getTitles(String author){
-        ArrayList<String> titles = new ArrayList<>();
+    public List<Song> getTitles(String author){
+        XmlPullParser myParser=createParser();
+        int event=0;
+        ArrayList<Song> titles = new ArrayList<>();
         try {
-            int event = myParser.getEventType();
-            while (event != XmlPullParser.END_DOCUMENT) {
-                if (event == XmlPullParser.START_TAG) {
-                    String name = myParser.getName();
-                    if (name.equals("song")&&myParser.getAttributeValue(null, "author").equals(author)){
-                        String title=myParser.getAttributeValue(null, "title");
-                        if(!titles.contains(title))
-                            titles.add(title);
-                    }
+            String value="";
+            while(!value.equals(author)){
+                event=goToSection(myParser,"author");
+                value=myParser.getAttributeValue(null,"author");
+            }
+            event = goToEvent(myParser, XmlPullParser.START_TAG);
+            while(event!=XmlPullParser.END_DOCUMENT) {
+                value = myParser.getName();
+                if (value.equals("song")) {
+                    Song song = new Song(author, myParser.getAttributeValue(null, "title"));
+                    titles.add(song);
                 }
-                event = myParser.next();
+                else if(value.equals("author"))
+                    break;
+                event = goToEvent(myParser, XmlPullParser.START_TAG);
             }
         } catch (XmlPullParserException e) {
             e.printStackTrace();
@@ -79,19 +104,32 @@ public class XmlAdapter {
     }
     public ArrayList<Song>getAllSongs(){
         ArrayList<Song> data = new ArrayList<>();
+        List<String>authors=getAuthors();
+        createParser();
+        for (String author:authors) {
+            data.addAll(getTitles(author));
+        }
+        return data;
+    }
+    public SongData getSongInfo(String author, String title){
+        XmlPullParser myParser=createParser();
+        int event=0;
+        SongData data=new SongData();
         try {
-            int event = myParser.getEventType();
-            while (event != XmlPullParser.END_DOCUMENT) {
-                if (event == XmlPullParser.START_TAG) {
-                    String name = myParser.getName();
-                    if (name.equals("song")){
-                        String author=myParser.getAttributeValue(null, "author");
-                        String title=myParser.getAttributeValue(null, "title");
-                        data.add(new Song(author,title));
-                    }
-                }
-                event = myParser.next();
+            String value="";
+            while(!value.equals(author)){
+                event=goToSection(myParser,"author");
+                value=myParser.getAttributeValue(null,"author");
             }
+            value="";
+            while(!value.equals(title)){
+                event=goToSection(myParser,"song");
+                value=myParser.getAttributeValue(null,"title");
+            }
+            event=goToSection(myParser,"text");
+            event=goToEvent(myParser,XmlPullParser.TEXT);
+            String songText = myParser.getText();
+            data.text=songText;
         } catch (XmlPullParserException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -99,13 +137,10 @@ public class XmlAdapter {
         }
         return data;
     }
-    //todo przerobić żeby zwracało dane a nie od razu z nich korzystało
+    /*
     public void getDataFromXml(String author, String title) {
         try {
-            XmlPullParserFactory xmlFactoryObject = XmlPullParserFactory.newInstance();
-            XmlPullParser myParser = xmlFactoryObject.newPullParser();
-            InputStream is = act.getAssets().open("songs.xml");
-            myParser.setInput(is,null);
+            XmlPullParser myParser=createParser();
             findSongXml(author, title, myParser);
             getSongData(myParser);
         } catch (XmlPullParserException e) {
@@ -116,17 +151,20 @@ public class XmlAdapter {
     }
 
     private void findSongXml(String author, String title, XmlPullParser myParser) throws XmlPullParserException, IOException {
-        int event = myParser.getEventType();
-        while (event != XmlPullParser.END_DOCUMENT) {
-            if (event == XmlPullParser.START_TAG) {
-                String name = myParser.getName();
-                if (name.equals("song") &&
-                        myParser.getAttributeValue(null, "title").equals(title) &&
-                        myParser.getAttributeValue(null, "author").equals(author)) {
-                    return;
+        myParser.getEventType();
+        while(myParser.next()!=XmlPullParser.END_DOCUMENT){
+            goToEvent(myParser,XmlPullParser.START_TAG);
+            String name = myParser.getName();
+            if (name.equals("author") && myParser.getAttributeValue(null, "author").equals(author)){
+                while(myParser.next()!=XmlPullParser.END_DOCUMENT) {
+                    goToEvent(myParser, XmlPullParser.START_TAG);
+                    name = myParser.getName();
+                    String value = myParser.getAttributeValue(null, "title");
+                    if (name.equals("song") && value.equals(title)) {
+                        return;
+                    }
                 }
             }
-            event = myParser.next();
         }
     }
 
@@ -143,11 +181,10 @@ public class XmlAdapter {
                     TextView textLabel = (TextView) act.findViewById(R.id.song_text);
                     textLabel.setText(songText);
                     textLabel.setMovementMethod(new ScrollingMovementMethod());
-                } else if (name.equals("cords")) {
-
+                    return;
                 }
             }
             event=myParser.next();
         }
-    }
+    }*/
 }

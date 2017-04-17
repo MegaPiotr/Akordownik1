@@ -2,9 +2,10 @@
 <resources>
     <color name="colorPrimary">#ff9920</color>
     <color name="colorPrimaryDark">#303f9f</color>
-    <color name="colorAccent">#202090</color>
+    <color name="colorAccent">#902020</color>
     <color name="colorToolbarText">#000000</color>
     <color name="colorWindowBackgroung">#000000</color>
     <color name="listviewDeriver">#ffff7c</color>
     <color name="disabled">#ffffff</color>
+    <color name="search">#555555</color>
 </resources>

@@ -64,12 +64,8 @@ public class ByTitle1Fragment extends Fragment implements AdapterView.OnItemClic
 
     protected ArrayList<Song> getData() {
         XmlAdapter xmlAdapter=new XmlAdapter(this.getActivity());
-        ArrayList<String> list=(ArrayList<String>)xmlAdapter.getTitles(author);
-        ArrayList<Song> data=new ArrayList<>();
-        for (String title:list) {
-            data.add(new Song(author,title));
-        }
-        return data;
+        ArrayList<Song> list= (ArrayList<Song>) xmlAdapter.getTitles(author);
+        return list;
     }
 
     protected ArrayAdapter<Song> getAdapter(ArrayList<Song>songs){

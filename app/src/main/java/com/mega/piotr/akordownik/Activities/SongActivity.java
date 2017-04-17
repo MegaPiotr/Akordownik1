@@ -4,12 +4,9 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import android.os.Handler;
-import android.provider.Settings;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,39 +16,42 @@ import android.widget.ImageButton;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.doubleclick.PublisherAdRequest;
-import com.google.android.gms.ads.doubleclick.PublisherAdView;
 import com.mega.piotr.akordownik.R;
-import com.mega.piotr.akordownik.ScrollingCalculator;
 import com.mega.piotr.akordownik.ScrollingHelper;
+import com.mega.piotr.akordownik.SongData;
 import com.mega.piotr.akordownik.XmlAdapter;
 
 import java.util.ArrayList;
 
-import static java.security.AccessController.getContext;
-
 public class SongActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView text;
-    private TextView time;
+    private TextView timeIndex;
     private ScrollingHelper helper;
-    private int timeScrolling;
-    private int limitTimeScrolling=500;
-    private int px=1;
-    private ArrayList<ImageButton> buttons;
+    private int currentIndexScrolling=0;
+    private ArrayList<View> buttons;
+    private int[] times=new int[]{200,86,55,40,32, 26, 22, 19, 17, 15, 14, 13, 12, 11, 10, 19, 18, 17, 16, 15};
+    private int[] pixels=new int[]{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_song);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        text=(TextView)findViewById(R.id.song_text);
+
+        ScrollView scroller=(ScrollView) findViewById(R.id.song_scroller);
+        helper=new ScrollingHelper(scroller);
+        helper.setTime(times[currentIndexScrolling]);
+        helper.setPixel(pixels[currentIndexScrolling]);
+        timeIndex =(TextView)findViewById(R.id.time_index);
+        timeIndex.setText(currentIndexScrolling+1+"");
+
         ImageButton btnup=(ImageButton)findViewById(R.id.btnFaster);
         ImageButton btndown=(ImageButton)findViewById(R.id.btnSlower);
         ImageButton btnplus=(ImageButton)findViewById(R.id.btnPlus);
         ImageButton btnminus=(ImageButton)findViewById(R.id.btnMinus);
         buttons=new ArrayList<>();
+        buttons.add(timeIndex);
         buttons.add(btnup);
         buttons.add(btndown);
         buttons.add(btnminus);
@@ -60,16 +60,18 @@ public class SongActivity extends AppCompatActivity implements View.OnClickListe
         btndown.setOnClickListener(this);
         btnplus.setOnClickListener(this);
         btnminus.setOnClickListener(this);
-        time=(TextView)findViewById(R.id.timer);
-        ScrollView scroller=(ScrollView) findViewById(R.id.song_scroller);
-        helper=new ScrollingHelper(scroller);
-        timeScrolling=limitTimeScrolling;
-        helper.setTime(timeScrolling);
-        helper.setPixel(px);
+
         if(getResources().getConfiguration().orientation== Configuration.ORIENTATION_LANDSCAPE)
             setFullscreen(true);
 
-
+        text=(TextView)findViewById(R.id.song_text);
+        text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(helper.isInRun()) helper.stopScrolling();
+                else helper.startScrolling();
+            }
+        });
     }
     @Override
     public void onResume() {
@@ -80,7 +82,8 @@ public class SongActivity extends AppCompatActivity implements View.OnClickListe
         //String fullName=author+" - "+title;
         setTitle(title);
         XmlAdapter xmlAdapter=new XmlAdapter(this);
-        xmlAdapter.getDataFromXml(author,title);
+        SongData info=xmlAdapter.getSongInfo(author,title);
+        text.setText(info.text);
     }
     @Override
     public boolean onSupportNavigateUp() {
@@ -128,32 +131,21 @@ public class SongActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void slower() {
-        int newTimeScrolling=Math.round(timeScrolling*1.1f);
-        if(newTimeScrolling>limitTimeScrolling) {
-            helper.stopScrolling();
-            timeScrolling=limitTimeScrolling;
+        if(currentIndexScrolling>0){
+            currentIndexScrolling--;
+            helper.setTime(times[currentIndexScrolling]);
+            helper.setPixel(pixels[currentIndexScrolling]);
+            timeIndex.setText(currentIndexScrolling+1+"");
         }
-        else{
-            timeScrolling=newTimeScrolling;
-            helper.setTime(timeScrolling);
-        }
-        time.setText(timeScrolling+"");
     }
 
     private void faster() {
-        if(timeScrolling==limitTimeScrolling&&!helper.isInRun())
-            helper.startScrolling();
-        else{
-            int newtimeScrolling= (int) Math.round(timeScrolling/(limitTimeScrolling+0.5*timeScrolling)*limitTimeScrolling);
-            if(newtimeScrolling==timeScrolling)
-            {
-                int newpx=px+1;
-                timeScrolling= (int) (newpx/(px/timeScrolling-0.5/limitTimeScrolling));
-            }
-
-            helper.setTime(timeScrolling);
+        if(currentIndexScrolling<times.length-1){
+            currentIndexScrolling++;
+            helper.setTime(times[currentIndexScrolling]);
+            helper.setPixel(pixels[currentIndexScrolling]);
+            timeIndex.setText(currentIndexScrolling+1+"");
         }
-        time.setText(timeScrolling+"");
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -173,7 +165,7 @@ public class SongActivity extends AppCompatActivity implements View.OnClickListe
         int id = item.getItemId();
         if (id == R.id.action_hide) {
             for(int i=0;i<buttons.size();i++){
-                ImageButton button=buttons.get(i);
+                View button=buttons.get(i);
                 if(button.getVisibility()==View.GONE)
                 {
                     button.setVisibility(View.VISIBLE);
