@@ -46,11 +46,12 @@ public class ChordActivity extends AppCompatActivity {
         });
     }
     public ArrayList<GridItem> getChordsInfo(String key){
+        String real_key = key.toLowerCase().replaceAll("#", "is");
         TypedArray img;
-        int arryidres = this.getResources().getIdentifier(key.toLowerCase()+"_res", "array", this.getPackageName());
+        int arryidres = this.getResources().getIdentifier(real_key+"_res", "array", this.getPackageName());
         img = getResources().obtainTypedArray(arryidres);
 
-        int arryidname = this.getResources().getIdentifier(key.toLowerCase()+"_names", "array", this.getPackageName());
+        int arryidname = this.getResources().getIdentifier(real_key+"_names", "array", this.getPackageName());
         String[]names  = this.getResources().getStringArray(arryidname);
 
         ArrayList<GridItem> items=new ArrayList<>();

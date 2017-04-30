@@ -16,5 +16,6 @@
         android:id="@+id/universal_list"
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
+        android:background="?android:attr/activatedBackgroundIndicator"
         />
 </LinearLayout>

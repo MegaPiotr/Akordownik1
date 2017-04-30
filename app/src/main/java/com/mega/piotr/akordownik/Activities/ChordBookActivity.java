@@ -25,7 +25,7 @@ public class ChordBookActivity extends AppCompatActivity {
     GridView gridView;
     public static final String chord="chord";
     static final String[] numbers = new String[] {
-            "A","B","C","C#","D","D#","E","F","F#","G","G#"};
+            "A","B","H","C","C#","D","D#","E","F","F#","G","G#"};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

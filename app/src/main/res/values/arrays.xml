@@ -8,4 +8,84 @@
         <item>@drawable/amol_1</item>
         <item>@drawable/adur_1</item>
     </integer-array>
+    <string-array name="b_names">
+        <item>b</item>
+        <item>B</item>
+    </string-array>
+    <integer-array name="b_res">
+        <item>@drawable/bmol_1</item>
+        <item>@drawable/bdur_1</item>
+    </integer-array>
+    <string-array name="h_names">
+        <item>h</item>
+        <item>H</item>
+        <item>H7</item>
+    </string-array>
+    <integer-array name="h_res">
+        <item>@drawable/hmol_1</item>
+        <item>@drawable/hdur_1</item>
+        <item>@drawable/h7_1</item>
+    </integer-array>
+    <string-array name="c_names">
+        <item>c</item>
+        <item>C</item>
+        <item>C</item>
+    </string-array>
+    <integer-array name="c_res">
+        <item>@drawable/cmol_1</item>
+        <item>@drawable/cdur_1</item>
+        <item>@drawable/cdur_2</item>
+    </integer-array>
+    <string-array name="cis_names">
+        <item>C#</item>
+    </string-array>
+    <integer-array name="cis_res">
+        <item>@drawable/cisdur_1</item>
+    </integer-array>
+    <string-array name="d_names">
+        <item>d</item>
+        <item>D</item>
+    </string-array>
+    <integer-array name="d_res">
+        <item>@drawable/dmol_1</item>
+        <item>@drawable/ddur_1</item>
+    </integer-array>
+    <string-array name="dis_names">
+    </string-array>
+    <integer-array name="dis_res">
+    </integer-array>
+    <string-array name="e_names">
+        <item>e</item>
+        <item>E</item>
+    </string-array>
+    <integer-array name="e_res">
+        <item>@drawable/emol_1</item>
+        <item>@drawable/edur_1</item>
+    </integer-array>
+    <string-array name="f_names">
+        <item>f</item>
+        <item>F</item>
+    </string-array>
+    <integer-array name="f_res">
+        <item>@drawable/fmol_1</item>
+        <item>@drawable/fdur_1</item>
+    </integer-array>
+    <string-array name="fis_names">
+        <item>F#</item>
+    </string-array>
+    <integer-array name="fis_res">
+        <item>@drawable/fisdur_1</item>
+    </integer-array>
+    <string-array name="g_names">
+        <item>G</item>
+        <item>G</item>
+    </string-array>
+    <integer-array name="g_res">
+        <item>@drawable/gdur_1</item>
+        <item>@drawable/gdur_2</item>
+    </integer-array>
+    <string-array name="gis_names">
+    </string-array>
+    <integer-array name="gis_res">
+    </integer-array>
 </resources>
