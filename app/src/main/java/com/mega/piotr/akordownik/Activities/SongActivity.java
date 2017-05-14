@@ -21,6 +21,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -271,14 +272,15 @@ public class SongActivity extends AppCompatActivity implements View.OnClickListe
             TextView chordView=(TextView) convertView.findViewById(R.id.song_chord);
             TextView textView=(TextView) convertView.findViewById(R.id.song_text);
             textView.setText(this.getItem(position).text);
+            LinearLayout chordViewLayout=(LinearLayout)convertView.findViewById(R.id.song_chord_layout);
             textView.setTextSize(fontSize);
             if(chord) {
                 chordView.setText(this.getItem(position).chord);
                 chordView.setTextSize(fontSize);
-                chordView.setVisibility(View.VISIBLE);
+                chordViewLayout.setVisibility(View.VISIBLE);
             }
             else
-                chordView.setVisibility(View.GONE);
+                chordViewLayout.setVisibility(View.GONE);
             return convertView;
         }
     }

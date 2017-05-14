@@ -23,7 +23,9 @@ import com.mega.piotr.akordownik.R;
 import com.mega.piotr.akordownik.Song;
 import com.mega.piotr.akordownik.XmlAdapter;
 
+import java.text.Collator;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class ByTitle1Fragment extends Fragment implements AdapterView.OnItemClickListener {
 
@@ -65,6 +67,7 @@ public class ByTitle1Fragment extends Fragment implements AdapterView.OnItemClic
     protected ArrayList<Song> getData() {
         XmlAdapter xmlAdapter=new XmlAdapter(this.getActivity());
         ArrayList<Song> list= (ArrayList<Song>) xmlAdapter.getTitles(author);
+        java.util.Collections.sort(list);
         return list;
     }
 

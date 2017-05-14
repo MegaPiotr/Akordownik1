@@ -20,7 +20,10 @@ import com.mega.piotr.akordownik.R;
 import com.mega.piotr.akordownik.Activities.TitleActivity;
 import com.mega.piotr.akordownik.XmlAdapter;
 
+import java.text.Collator;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class ByAuthorFragment extends Fragment implements AdapterView.OnItemClickListener {
 
@@ -31,7 +34,9 @@ public class ByAuthorFragment extends Fragment implements AdapterView.OnItemClic
         getActivity().setTitle("Wykonawcy");
         ListView lv= (ListView) view.findViewById(R.id.universal_list);
         XmlAdapter xmlAdapter=new XmlAdapter(this.getActivity());
-        adapter = new SimpleArrayAdapter(this.getActivity(), xmlAdapter.getAuthors());
+        List<String> authors=xmlAdapter.getAuthors();
+        java.util.Collections.sort(authors, Collator.getInstance(new Locale("PL")));
+        adapter = new SimpleArrayAdapter(this.getActivity(),authors);
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(this);
         return view;
